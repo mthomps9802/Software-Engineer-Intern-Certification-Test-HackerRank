@@ -1,0 +1,75 @@
+#!/bin/python3
+
+import math
+import os
+import random
+import re
+import sys
+
+
+#
+# Complete the 'priceCheck' function below.
+#
+# The function is expected to return an INTEGER.
+# The function accepts following parameters:
+#  1. STRING_ARRAY products
+#  2. FLOAT_ARRAY productPrices
+#  3. STRING_ARRAY productSold
+#  4. FLOAT_ARRAY soldPrice
+#
+
+def priceCheck(products, productPrices, productSold, soldPrice):
+    # Write your code here
+    i = 0
+    product_dict = dict(zip(products, productPrices))
+    productSld_dict = dict(zip(productSold, soldPrice))
+    print(product_dict)
+    print(productSld_dict)
+    
+    for prod in product_dict.keys() & productSld_dict.keys():
+        price1 = product_dict[prod]
+        price2 = productSld_dict[prod]
+        if price2 != price1:
+            i+=1
+    return i
+    
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    products_count = int(input().strip())
+
+    products = []
+
+    for _ in range(products_count):
+        products_item = input()
+        products.append(products_item)
+
+    productPrices_count = int(input().strip())
+
+    productPrices = []
+
+    for _ in range(productPrices_count):
+        productPrices_item = float(input().strip())
+        productPrices.append(productPrices_item)
+
+    productSold_count = int(input().strip())
+
+    productSold = []
+
+    for _ in range(productSold_count):
+        productSold_item = input()
+        productSold.append(productSold_item)
+
+    soldPrice_count = int(input().strip())
+
+    soldPrice = []
+
+    for _ in range(soldPrice_count):
+        soldPrice_item = float(input().strip())
+        soldPrice.append(soldPrice_item)
+
+    result = priceCheck(products, productPrices, productSold, soldPrice)
+
+    fptr.write(str(result) + '\n')
+
+    fptr.close()
